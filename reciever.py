@@ -52,9 +52,12 @@ def freq_listener(chunk=4410):
 	a = data.T[0] # this is a two channel soundtrack, I get the first track
 	b=[(ele/2**8.)*2-1 for ele in a] # this is 8-bit track, b is now normalized on [-1,1)
 	c = fft(b) # calculate fourier transform (complex numbers list)
-	d = len(c)/2  # you only need half of the fft list (real signal symmetry)
-	print np.argmax(abs(c.imag))
-	print np.real(c[153])
+	d = len(c)  # you only need half of the fft list (real signal symmetry)
+	freqs = np.fft.fftfreq(d)
+	maxPosition = np.argmax(abs(c.imag))
+	print c
+	print np.real(c[maxPosition])
+	print freqs[maxPosition]*44100
 	plt.plot(abs(c[:1000]),'r') 
 	plt.show()
 
