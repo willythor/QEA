@@ -64,7 +64,7 @@ def run_transmitter():
 
 	#start on JACK
 	call(["sudo", "jack_control", "start"])
-	bobby = str_2_bits("jeremy ur a cutie")
+	bobby = str_2_bits("daniel ur looking pretty fine today, fin"e)
 	print len(bobby)
 	bob = bits_2_wave(bobby,44100,1.0)
 

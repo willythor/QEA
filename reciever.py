@@ -6,13 +6,14 @@ import matplotlib.pyplot as plt
 from scipy.fftpack import fft, rfft
 from scipy.io import wavfile # get the api
 from time import sleep
+import timeit
 
 def get_audio():
 	CHUNK = 1024
 	FORMAT = pyaudio.paInt16
 	CHANNELS = 2
 	RATE = 44100
-	RECORD_SECONDS = 5
+	RECORD_SECONDS = .1
 	WAVE_OUTPUT_FILENAME = "output.wav"
 
 	p = pyaudio.PyAudio()
@@ -50,7 +51,9 @@ def freq_listener():
 	#listen for reciever tone
 	#take a sound every .1 seconds 
 	big_ass_array = []
-	for i in range(200):
+	for i in range(10):
+		start = timeit.timeit()
+		#print i
 		get_audio()
 		fs, data = wavfile.read('output.wav') # load the data
 		a = data.T[0] # this is a two channel soundtrack, I get the first track
@@ -59,12 +62,16 @@ def freq_listener():
 		d = len(c)  # you only need half of the fft list (real signal symmetry)
 		freqs = np.fft.fftfreq(d)
 		maxPosition = np.argmax(abs(c.imag))
-		print c
-		print np.real(c[maxPosition])
-		print freqs[maxPosition]*44100
+		# print c
+		# print np.real(c[maxPosition])
+		# print freqs[maxPosition]*44100
 		freq = freqs[maxPosition]*44100
 		big_ass_array.append(freq)
+
 		sleep(.1)
+		end = timeit.timeit()
+		print end - start
+		
 	return big_ass_array
 		# plt.plot(abs(c[:1000]),'r') 
 		# plt.show()
