@@ -64,9 +64,10 @@ def run_transmitter():
 
 	#start on JACK
 	call(["sudo", "jack_control", "start"])
-	bobby = str_2_bits("jonnnerrrrrr")
-	print bobby
+	bobby = str_2_bits("jeremy ur a cutie")
+	print len(bobby)
 	bob = bits_2_wave(bobby,44100,1.0)
+
 	play_wave(bob,44100,0.5)
 	#test = np.array([])
 	#bits_2_wave()
