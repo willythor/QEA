@@ -27,6 +27,7 @@ def str_2_bits(string):
 def bits_2_wave(bits, fs, duration):
 
 	wave = []
+	wave.append(sine(540, 1, fs))
 
 	for bit in bits:
 		if bit == 0:
@@ -53,9 +54,6 @@ def play_wave(samples, fs, volume = 1):
 	stream.write(samples.astype(np.float32).tostring())
 
 	# play. May repeat with different volume values (if done interactively) 
-	#stream.write(volume*samples)
-
-	#stream.stop_stream()
 	stream.close()
 
 	p.terminate()
@@ -64,7 +62,7 @@ def run_transmitter():
 
 	#start on JACK
 	call(["sudo", "jack_control", "start"])
-	bobby = str_2_bits("daniel ur looking pretty fine today, fin"e)
+	bobby = str_2_bits("daniel ur looking pretty fine today, fine")
 	print len(bobby)
 	bob = bits_2_wave(bobby,44100,1.0)
 
