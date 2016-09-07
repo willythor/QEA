@@ -1,5 +1,7 @@
+def counter(word):
+    d = {}
+    for c in word:
+        d[c] = d.get(c, 0) + 1
+    return d
 
-import time
-for i in range(100):
-	print i
-	time.sleep(.1)
+print counter('johnjjjjj')
